@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.js">
+
+          console.log("date is>>>>"+date)
+          var getDate=function(){
+              var date=new Date()
+              alert("date is"+date)
+          }
+
+          var getMoment=function(){
+              var now = moment();
+              alert("now is"+now)
+          }
+        console.log("moment value is>>>>"+JSON.stringify(now))
+    </script>
+
+    <script src="moment.js"></script>
+    <script>
+        moment().format();
+    </script>
+</head>
+<body>
+       hello to index page
+<a href="http://127.0.0.1:5000/response/">link</a>
+       <h1><%=getDate()%></h1>
+</body>
+</html>
