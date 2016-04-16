@@ -6,10 +6,15 @@
  * To change this template use File | Settings | File Templates.
  */
 var express = require('express');
+var bodyParser=require("body-parser-json")
 var app = express();
 var fs = require('fs');
 var http = require('http');
 var moment = require('moment');
+app.use(express.static(__dirname + '/public')); 	// set the static files location /public/img will be /img for users
+// log every request to the console
+app.use(bodyParser()); 						// have the ability to pull information from html in POST
+//app.use(express.methodOverride());
 
 
 
@@ -29,7 +34,7 @@ var MongoClient = require('mongodb').MongoClient
 var db;
 
 
-MongoClient.connect('mongodb://192.168.100.21/business_sb', function (err, db1)
+MongoClient.connect('mongodb://127.0.0.1/test', function (err, db1)
 {
     if (err) throw err;
     db = db1;
@@ -72,6 +77,8 @@ function find(callback) {
 }
 
 function insert(name, id) {
+    console.log("name>>>"+name)
+    console.log("id>>>"+id)
     var collection = db.collection('record');
     collection.insert({name:name, id:id}, function (err, docs) {
         console.log("Error is:" + err);
@@ -101,10 +108,7 @@ function update(name, id) {
 // config files
 
 
-app.use(express.static(__dirname + '/public')); 	// set the static files location /public/img will be /img for users
-// log every request to the console
-app.use(express.bodyParser()); 						// have the ability to pull information from html in POST
-app.use(express.methodOverride()); 					// have the ability to simulate DELETE and PUT
+					// have the ability to simulate DELETE and PUT
 
 
 //app.get('/', function (req, res) {

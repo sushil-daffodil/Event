@@ -80,16 +80,16 @@ app.directive('update',[function($scope){
 }]) ;
 
 
-app.directive('update',[function($scope){
-    return{
-        restrict:"E",
-        replace:true,
-        template:' <div class="box"> '+
-            '<h2>  Update a record in database <br>   </h2>'+
-
-            ' Enter the name:    <input type="text" ng-model="text3">  <br>'+
-            ' Enter the id:    <input type="text" ng-model="id">   <br>'+
-            '<button ng-click="update()">Update</button>' +
-            ' </div>'
-    }
-}]) ;
+//app.directive('update',[function($scope){
+//    return{
+//        restrict:"E",
+//        replace:true,
+//        template:' <div class="box"> '+
+//            '<h2>  Update a record in database <br>   </h2>'+
+//
+//            ' Enter the name:    <input type="text" ng-model="text3">  <br>'+
+//            ' Enter the id:    <input type="text" ng-model="id">   <br>'+
+//            '<button ng-click="update()">Update</button>' +
+//            ' </div>'
+//    }
+//}]) ;

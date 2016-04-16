@@ -11,17 +11,14 @@ app.controller("ctrl",function($scope)
 {
           $scope.hello="hello to response file";
 
-            $scope.text="enter a word";
+     $scope.text="enter a word";
         $scope.a=[];
 
     $scope.get=function()
     {
 
         var url="http://127.0.0.1:5000/get";
-
-
-
-        if(window.XMLHttpRequest){
+       if(window.XMLHttpRequest){
             request=new XMLHttpRequest();
         }
         else if(window.ActiveXObject){
