@@ -15,14 +15,15 @@
 var express = require('express');
 var app = express();
 var fs=require('fs');
-app.use(express.static(__dirname + '/public')); 	// set the static files location /public/img will be /img for users
+app.use(express.static(__dirname + './../../public')); 	// set the static files location /public/img will be /img for users
+app.use(express.static(__dirname + './../images')); 	// set the static files location /public/img will be /img for users
 // log every request to the console
-app.use(express.bodyParser()); 						// have the ability to pull information from html in POST
-app.use(express.methodOverride()); 					// have the ability to simulate DELETE and PUT
+//app.use(express.bodyParser()); 						// have the ability to pull information from html in POST
+//app.use(express.methodOverride()); 					// have the ability to simulate DELETE and PUT
 
 
 app.get('/',function(req,res){
-    res.sendfile('./public/index.html');
+    res.sendfile('./index.html');
 })
 
 app.get('/processform1',function(req,res){
@@ -153,5 +154,5 @@ app.get('/partial-about', function(req, res){
 
 
 
-app.listen(5000);
-console.log("server is runnign at 5000");
+app.listen(7200);
+console.log("server is runnign at 3000");

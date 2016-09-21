@@ -2,16 +2,16 @@ var SELF = require('./ConfigDB.js')
 var crt = require('crypto');
 var Q = require("q");
 var nodemailer = require('nodemailer');
-var url = 'http://127.0.0.1:8080';
+var url = 'http://192.168.100.172:3000';
 var ObjectID = require("mongodb").ObjectID;
 var RESOLVE = require('requirejs');
+
 
 exports.resolveFunction = function (path) {
     var d = Q.defer();
     //path = "./"+path+".js";
     RESOLVE([path], function (data) {
         d.resolve(data)
-
     })
     return d.promise
 }
@@ -34,13 +34,9 @@ exports.Preinsert = function (insert, collectionName, db) {
     }
 
 }
-
-
-
-
 exports.insert = function (insert, collectionName, db) {
     console.log("insert method called>>>>>>>")
-    return SELF.Preinsert(insert, collectionName, db).then(function (insert) {
+   // return SELF.Preinsert(insert, collectionName, db).then(function (insert) {
         console.log("insert>>>>>>>" + JSON.stringify(insert))
         var Collection = db.collection(collectionName);
         var d = Q.defer();
@@ -55,9 +51,7 @@ exports.insert = function (insert, collectionName, db) {
             }
         })
         return d.promise;
-    })
-
-
+  //  })
 }
 
 exports.find = function (params, collectionName, db) {
@@ -113,7 +107,6 @@ exports.find = function (params, collectionName, db) {
 
 }
 
-
 exports.Replicate = function (params, collectionName, db) {
     console.log("Pre insert method called>>>>>>>")
     if (params) {
@@ -127,7 +120,6 @@ exports.Replicate = function (params, collectionName, db) {
         for(var c in update){
             arrayFilter.push(c)
         }
-
         var filter = {};
         filter["refcollection"] = collectionName;
         filter["set"] ={"$in":arrayFilter};
@@ -158,8 +150,7 @@ exports.Replicate = function (params, collectionName, db) {
 }
 
 exports.update = function (params, collectionName, db) {
-
-    return SELF.Replicate(JSON.parse(JSON.stringify(params)), collectionName, db).then(function() {
+   // return SELF.Replicate(JSON.parse(JSON.stringify(params)), collectionName, db).then(function() {
         var d = Q.defer();
         var Collection = db.collection(collectionName);
         var filter = params.filter || {};
@@ -167,7 +158,6 @@ exports.update = function (params, collectionName, db) {
         if (!update) {
             d.reject("Nothing to update");
         }
-
         var options = params.options || {};
         console.log("options >>>" + JSON.stringify(options));
         Collection.update(filter, update, options, function (err, result) {
@@ -178,7 +168,7 @@ exports.update = function (params, collectionName, db) {
             }
         })
         return d.promise;
-    })
+   // })
 
 }
 
@@ -200,15 +190,14 @@ exports.delete = function (filter, collectionName, db) {
 
 exports.insertNewUser = function (db, req, res) {
     var params = req.param('options');
-    console.log("param>>>>" + params)
-    params = JSON.parse(params);
+    console.log("param>>>>" + JSON.stringify(params))
+   // params = JSON.parse(params);
     var name = params.name;
     var pass = params.pass;
     var email = params.email;
     console.log("name>>>>" + name)
     console.log("pass>>>>" + pass)
     console.log("email>>>>" + email)
-
     var filter = {};
     filter["name"] = name;
     filter["email"] = email;
@@ -227,7 +216,10 @@ exports.insertNewUser = function (db, req, res) {
         if (docs.length > 0) {
             console.log("details>>>>>" + JSON.stringify(details))
             console.log("user already exists")
-            res.render('First', {'name': name, 'pass': pass, email: email, 'msg': 'user already exists'})
+            var json1={'name': name, 'pass': pass, email: email, 'msg': 'user already exists'}
+            res.writeHead(200, {"Content-Type": "application/json"});
+            var json = JSON.stringify(json1);
+            res.end(json);
             d.resolve();
 
         } else {
@@ -238,13 +230,17 @@ exports.insertNewUser = function (db, req, res) {
             para["pass"] = pass, para["email"] = email, para["approvtoken"] = token, para["approve"] = false
             return SELF.insert(para, collection, db).then(function () {
                 console.log("out form the insert function>>>>")
-                res.render('First', {
+                var json1={
                     'name': name,
                     'pass': pass,
                     email: email,
+                     code:200,
                     'msg': 'successfully inserted',
                     'token': token
-                })
+                }
+                res.writeHead(200, {"Content-Type": "application/json"});
+                var json = JSON.stringify(json1);
+                res.end(json);
                 d.resolve();
             })
 
@@ -274,7 +270,7 @@ function sendMail(mailOptions) {
         service: 'Gmail',
         auth: {
             user: 'sushil.nagvan@daffodilsw.com',
-            pass: 'xxxxxxx'
+            pass: '074714018160'
         }
     });
 
@@ -305,8 +301,7 @@ function getToken() {
 exports.loginPromise = function (db, req, res) {
     console.log("Cookies: ", req.cookies)
     var params = req.param('options');
-
-    params = JSON.parse(params);
+    //params = JSON.parse(params);
     var name = params.name
     var pass = params.pass
     var filter = {};
@@ -341,19 +336,28 @@ exports.loginPromise = function (db, req, res) {
             para["update"] = {$set: update}
             return SELF.update(para, collection, db).then(function (data) {
                 console.log("out from update>>>>" + JSON.stringify(data));
-                res.render('First', {
+              var json1= {
                     'name': docs[0].name,
                     'pass': docs[0].pass,
                     'msg': 'successfully login',
-                    'token': token
-                })
+                    'token': token,
+                        'code':200
+                }
+                res.cookie("token", token);
+                res.writeHead(200, {"Content-Type": "application/json"});
+
+                var json = JSON.stringify(json1);
+                res.end(json);
                 d.resolve();
             })
 
 
         } else {
             console.log("enter into the else>>>>>")
-            res.render('First', {'msg': 'username or password not match'})
+           var json1= {'msg': 'username or password not match'}
+            res.writeHead(200, {"Content-Type": "application/json"});
+            var json = JSON.stringify(json1);
+            res.end(json);
             d.resolve();
         }
         return d.promise;
@@ -378,12 +382,21 @@ exports.disconnectWithPromise = function (db, req, res) {
             update["token"] = null;
             para["update"] = {$unset: update}
             return SELF.update(para, collection, db).then(function () {
-                res.render('First', {'token': token, 'msg': 'successfully logout'})
+                console.log("out form there")
+                var json1={'token': token, 'msg': 'successfully logout'}
+                res.clearCookie("token")
+                res.writeHead(200, {"Content-Type": "application/json"});
+                var json = JSON.stringify(json1);
+                console.log("final response is>>>")
+                res.end(json);
                 d.resolve();
             });
         } else {
             console.log("enter into the else>>>>>")
-            res.render('First', {'msg': 'username or password not match'})
+           var json1={'msg': 'username or password not match'}
+            res.writeHead(200, {"Content-Type": "application/json"});
+            var json = JSON.stringify(json1);
+            res.end(json);
             d.resolve();
         }
         return d.promise;
@@ -392,11 +405,12 @@ exports.disconnectWithPromise = function (db, req, res) {
 }
 
 exports.validateToken = function (req, res, db) {
-    var token = req.param('token');
+    console.log(req.cookies)
+    var token = req.cookies && req.cookies.token ? req.cookies.token : undefined;
     var validate = {validate: false};
     var d = Q.defer();
     if (token) {
-        token = JSON.parse(token);
+        //token = JSON.parse(token);
         var filter = {};
         filter["token"] = token;
         var para = {};
@@ -448,18 +462,25 @@ exports.approve = function (req, res, db) {
 
             return SELF.update(para, collection, db).then(function (data) {
                 console.log("out from update>>>>" + JSON.stringify(data))
-                res.render('First', {
+
+                var json1={
                     'name': details[0].name,
                     'pass': details[0].pass,
                     'msg': 'successfully Approved',
                     'token': token
-                })
+                }
+                res.writeHead(200, {"Content-Type": "application/json"});
+                var json = JSON.stringify(json1);
+                res.end(json);
                 d.resolve();
             });
 
         } else {
             console.log("enter into the else>>>>>")
-            res.render('First', {'msg': 'username or password not match'})
+         var json1= {'msg': 'username or password not match'}
+            res.writeHead(200, {"Content-Type": "application/json"});
+            var json = JSON.stringify(json1);
+            res.end(json);
             d.resolve();
         }
         return d.promise;

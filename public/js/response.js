@@ -1,22 +1,14 @@
-/**
- * Created with IntelliJ IDEA.
- * User: Sushil
- * Date: 5/5/14
- * Time: 11:48 AM
- * To change this template use File | Settings | File Templates.
- */
+
 
 var app=angular.module("myApp",[]);
-app.controller("ctrl",function($scope)
+app.controller("ctrl",function($scope, $http,$log, $window)
 {
-          $scope.hello="hello to response file";
-
-     $scope.text="enter a word";
-        $scope.a=[];
-
+    $scope.hello="hello to response file";
+    $scope.text="enter a word";
+    $scope.a=[];
+  //  $scope.msg='';
     $scope.get=function()
     {
-
         var url="http://127.0.0.1:5000/get";
        if(window.XMLHttpRequest){
             request=new XMLHttpRequest();
@@ -24,7 +16,6 @@ app.controller("ctrl",function($scope)
         else if(window.ActiveXObject){
             request=new ActiveXObject("Microsoft.XMLHTTP");
         }
-
         try
         {
             request.onreadystatechange=getInfo;
@@ -49,42 +40,81 @@ app.controller("ctrl",function($scope)
 
     $scope.insert=function()
     {
-
         var name=$scope.text1;
         var id=$scope.id;
-        var url="http://127.0.0.1:5000/insert?name="+name+"&id="+id;
-        alert("hello to "+url);
-          $scope.text1="";
-           $scope.id="";
+        var email = $scope.email;
+        var json={"options":{"name":name,"pass":id,"email":email}}
+        $http.post('/insert', json)
+            .success(function(response) {
+                // clear the form so our user is ready to enter another
+                console.log(response);
 
-        if(window.XMLHttpRequest){
-            request=new XMLHttpRequest();
-        }
-        else if(window.ActiveXObject){
-            request=new ActiveXObject("Microsoft.XMLHTTP");
-        }
+                if (response['code'] == '200') {
+                    if(response['msg']){
+                        $scope.msg=response['msg']
+                    }
+                }
+                //else {
+                //    if(response['msg']){
+                //        $scope.msg=response['msg']
+                //    }
+                //}
+            })
+            .error(function(response) {
+                console.log('Error: ' + response);
+            });
+    }
 
-        try
-        {
-            request.onreadystatechange=getInfo;
-            request.open("GET",url,false);
-            request.send();
-        }
-        catch(e)
-        {
-            alert("Unable to connect to server");
-        }
+
+    $scope.login=function()
+    {
+        var name=$scope.text1;
+        var id=$scope.id;
+        var json={"options":{"name":name,"pass":id}}
+        $http.post('/connect', json)
+            .success(function(response) {
+                // clear the form so our user is ready to enter another
+                console.log(response);
+                if (response['code'] == '200') {
+                    var url = "http://" + $window.location.host + "/firstpage.html";
+                    $log.log(url);
+                    $window.location.href = url;
+                }
+                else {
+                    if(response['msg']){
+                        $scope.msg=response['msg']
+                        console.log($scope.msg)
+                    }
+                }
+            })
+            .error(function(response) {
+                console.log('Error: ' + response);
+            });
+    }
+
+    $scope.logout=function()
+    {
+
+        $http.post('/disconnectWithPromise')
+            .success(function(response) {
+                // clear the form so our user is ready to enter another
+                console.log(response);
+                    if(response['msg']){
+                        $scope.msg=response['msg']
+                        console.log($scope.msg)
+
+                }
+            })
+            .error(function(response) {
+                console.log('Error: ' + response);
+            });
     }
 
     $scope.delete=function(h)
     {
-
         var name= h.name;
-
         var url="http://127.0.0.1:5000/delete?name="+name;
-        alert("hello to "+url);
-
-
+        alert("hello to "+url)
         if(window.XMLHttpRequest){
             request=new XMLHttpRequest();
         }
@@ -109,10 +139,8 @@ app.controller("ctrl",function($scope)
 
         var name=$scope.text3;
         var id=$scope.id;
-
         var url="http://127.0.0.1:5000/update?name="+name+"&id="+id;
         alert("hello to "+url);
-
         $scope.text3="";
         $scope.id="";
         if(window.XMLHttpRequest){
