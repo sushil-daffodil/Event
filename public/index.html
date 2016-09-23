@@ -35,23 +35,48 @@
       <div class="clear"></div>
       <div class="latestprojectzone">
         <h1>Latest Projects</h1>
-        <div class="projectgallery">
-          <div style="height:113px;">
-            <div class="projectimg"><img src="images/project1.jpg" alt="" border="0" /></div>
-            <div class="projectimg"><img src="images/project2.jpg" alt="" border="0" /></div>
-            <div class="projectimg"><img src="images/project3.jpg" alt="" border="0" /></div>
-            <div class="projectimg"><img src="images/project4.jpg" alt="" border="0" /></div>
-            <div class="clear"></div>
-          </div>
-          <div>
-            <div class="projecttxt">Bridge Construction</div>
-            <div class="projecttxt">Marine Construction</div>
-            <div class="projecttxt">Office Construction</div>
-            <div class="projecttxt">Building Construction</div>
-            <div class="clear"></div>
+            <!--<div class="projectgallery" id="content-slider" style="height:113px;width:400px;overflow: hidden">
+                <div id="slider">
+                  <div id="mask">
+                    <div class="projectimg" id="first" class="firstanimation"><img src="images/project1.jpg" alt="" border="0" /></div>
+                    <div class="projectimg" id="second" class="secondanimation"><img src="images/project2.jpg" alt="" border="0" /></div>
+                    <div class="projectimg" id="third" class="thirdanimation"><img src="images/project3.jpg" alt="" border="0" /></div>
+                    <div class="projectimg" id="fourth" class="fourthanimation"><img src="images/project4.jpg" alt="" border="0" /></div>
+                  </div>
+                </div>
+            </div>-->
+        <div class="container">
+          <div id="content-slider">
+            <div id="slider">  <!-- Slider container -->
+              <div id="mask">  <!-- Mask -->
+
+                <ul>
+                  <li id="first" class="firstanimation" style="justify-content: center">  <!-- ID for tooltip and class for animation -->
+                    <img src="images/project1.jpg" />
+                    <div><span>Bridge Construction</span></div>
+                  </li>
+
+                  <li id="second" class="secondanimation">
+                    <img src="images/project2.jpg" />
+                    <div><span>Marine Construction</span></div>
+                  </li>
+
+                  <li id="third" class="thirdanimation">
+                    <img src="images/project3.jpg" />
+                    <div><span>Office Construction</span></div>
+                  </li>
+
+                  <li id="fourth" class="fourthanimation">
+                    <img src="images/project4.jpg" />
+                    <div><span>Building Construction</span></div>
+                  </li>
+                </ul>
+
+              </div>  <!-- End Mask -->
+              <div class="progress-bar"></div>  <!-- Progress Bar -->
+            </div>  <!-- End Slider Container -->
           </div>
         </div>
-        <div class="clear"></div>
       </div>
     </div>
     <div class="workzone-right">

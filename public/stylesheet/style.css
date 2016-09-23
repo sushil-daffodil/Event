@@ -1,5 +1,123 @@
 /* CSS Document */
 
+/*slider property */
+#slider {
+	background: white;
+	border: 5px solid #eaeaea;
+	box-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+	height: 150px;
+	width: 500px;
+	/*margin: 40px auto 0;*/
+	overflow: visible;
+	position: relative;
+}
+
+#mask {
+	overflow: hidden;
+	height: 150px;
+}
+
+#slider ul {
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+#slider li {
+	width: 310px;  /* Width Image */
+	height: 150px; /* Height Image */
+	position: absolute;
+	right: -325px; /* Original Position - Outside of the Slider */
+	top: 10px;
+	list-style: none;
+}
+
+#slider li.firstanimation {
+	animation: cycle 20s linear infinite;
+}
+
+#slider li.secondanimation {
+	animation: cycletwo 20s linear infinite;
+}
+
+#slider li.thirdanimation {
+	animation: cyclethree 20s linear infinite;
+}
+
+#slider li.fourthanimation {
+	animation: cyclefour 20s linear infinite;
+}
+
+
+@keyframes cycle {
+	0%  { right: 0px; } /* When you start the slide, the first image is already visible */
+	5% { right: 0px; } /* Original Position */
+	20% { right: 0px; opacity:1; z-index:0; } /* From 4% to 16 % = for 3 seconds the image is visible */
+	25% { right: 325px; opacity: 0; z-index: 0; } /* From 16% to 20% = for 1 second exit image */
+	26% { right: -325px; opacity: 0; z-index: -1; } /* Return to Original Position */
+	90% { right: -325px; opacity: 0; z-index: 0; }
+	95% { right: -325px; opacity: 0; } /* From 96% to 100% = for 1 second enter image*/
+	100%{ right: 0px; opacity: 1; }
+}
+
+@keyframes cycletwo {
+	0%  { right: -325px; opacity: 0; } /* Original Position */
+	20% { right: -325px; opacity: 0; }/* Starts moving after 16% to this position */
+	25% { right: 0px; opacity: 1; }
+	30% { right: 0px; opacity: 1; }  /* From 20% to 24% = for 1 second enter image*/
+	45% { right: 0px; opacity: 1; z-index: 0; }   /* From 24% to 36 % = for 3 seconds the image is visible */
+	50% { right: 325px; opacity: 0; z-index: 0; } /* From 36% to 40% = for 1 second exit image */
+	51% { right: -325px; opacity: 0; z-index: -1; }   /* Return to Original Position */
+	100%{ right: -325px; opacity: 0; z-index: -1; }
+}
+
+@keyframes cyclethree {
+	0%  { right: -325px; opacity: 0; }
+	45% { right: -325px; opacity: 0; }
+	50% { right: 0px; opacity: 1; }
+	55% { right: 0px; opacity: 1; }
+	70% { right: 0px; opacity: 1; }
+	75% { right: 325px; opacity: 0; z-index: 0; }
+	76% { right: -325px; opacity: 0; z-index: -1; }
+	100%{ right: -325px; opacity: 0; z-index: -1; }
+}
+
+@keyframes cyclefour {
+	0%  { right: -325px; opacity: 0; }
+	70% { right: -325px; opacity: 0; }
+	75% { right: 0px; opacity: 1; }
+	80% { right: 0px; opacity: 1; }
+	95% { right: 0px; opacity: 1; z-index: 0; }
+	100% { right: 325px; opacity: 0; z-index: 0; }
+}
+
+.progress-bar {
+	position: relative;
+	top: -5px;
+	width: 500px;
+	height: 5px;
+	background: green;
+	animation: fullexpand 20s ease-out infinite;
+}
+
+@keyframes fullexpand {
+	/* In these keyframes, the progress-bar is stationary */
+	0%, 25%, 50%, 75%, 100% { width: 0%; opacity: 0; }
+
+	/* In these keyframes, the progress-bar starts to come alive */
+	5%, 30%, 55%,  80% { width: 0%; opacity: 0.3; }
+
+	/* In these keyframes, the progress-bar moves forward for 3 seconds */
+	20%, 45%, 70%, 95% { width: 100%; opacity: 0.7; }
+
+	/* In these keyframes, the progress-bar has finished his path */
+	21%, 46%, 71%, 96% { width: 100%; opacity: 0.3; }
+
+	22%, 47%, 72%, 98% { width: 100%; opacity: 0; }
+
+}
+
+
 body {
 	font:11px Arial, Helvetica, sans-serif;
 	color:#535353;
