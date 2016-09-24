@@ -10,16 +10,9 @@
 
 
 
-app.directive('master_page',[function($scope){
-    return{
-        restrict:"E",
-        replace:true,
-        template:'<div>hello</div>'
 
-    }
-}])
 
-app.directive('master_page1',[function($scope){
+app.directive('masterpage',[function($scope){
     return{
         restrict:"E",
         replace:true,
@@ -80,7 +73,7 @@ app.directive('master_page1',[function($scope){
 }])
 
 
-app.directive('about_us',[function($scope)
+app.directive('aboutus',[function($scope)
 {
     return{
         restrict:"E",
@@ -345,7 +338,7 @@ app.directive('privacy',[function($scope)
     }
 }])
 
-app.directive('contact_us',[function($scope)
+app.directive('contactus',[function($scope)
 {
     return{
         restrict:"E",

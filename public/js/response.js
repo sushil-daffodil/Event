@@ -1,8 +1,16 @@
 
 
-var app=angular.module("myApp",[]);
+var app= app || angular.module("myApp",[]) ;
+
 app.controller("ctrl",function($scope, $http,$log, $window)
 {
+    $scope.activeView = 'home'
+    $scope.onClick=function(name) {
+        $scope.activeView = name
+        console.log('clicked');
+    }
+
+
     $scope.hello="hello to response file";
     $scope.text="enter a word";
     $scope.a=[];

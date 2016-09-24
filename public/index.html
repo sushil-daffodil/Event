@@ -1,21 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html ng-app="myApp">
 <head>
   <title>Construction Company</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link href="stylesheet/style.css" rel="stylesheet" type="text/css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/response.js"></script>
+  <script type="text/javascript" src="js/directive.js"></script>
 </head>
-<body>
+<body ng-controller="ctrl" >
 <div id="container">
   <div class="header">
     <div class="topmenu" >
       <ul>
-        <li><a href="aboutus.html">About Us</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="support.html">Support</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-        <li style="border:none;"><a href="contact.html">Contact Us</a></li>
+
+        <li><a ng-click="onClick('home')">Home</a></li>
+        <li><a ng-click="onClick('active')">About Us</a></li>
+        <li><a ng-click="onClick('projects')">Projects</a></li>
+        <li><a ng-click="onClick('services')">Services</a></li>
+        <li><a ng-click="onClick('support')">Support</a></li>
+        <li><a ng-click="onClick('privacy')">Privacy</a></li>
+        <li><a ng-click="onClick('contactus')">Contact Us</a></li>
       </ul>
     </div>
   </div>
@@ -25,60 +30,31 @@
   </div>
   <div class="clear"></div>
   <div class="workzone">
-    <div class="workzone-left">
-      <div>
-        <h1>Welcome to Events Company</h1>
-        <div> <strong>Lorem ipsum dolor sit amet,</strong> consectetuer adipiscing elit. Duis cursus tortor. Nunc consectetuer diam ac odio. Pellentesque vel mauris sit amet urna malesuada ornare. Curabitur venenatis est eget arcu. Donec vestibulum. Proin rutrum. Morbi commodo fringilla orci. Ut vel tortor. In ut velit. Vivamus hendrerit aliquam quam. Curabitur placerat eros vitae libero. Fusce sagittis commodo purus. Cras orci. Quisque at justo. Quisque ullamcorper feugiat ligula. Quisque vulputate. <br />
-          <br />
-          Etiam eu lorem ac odio lacinia euismod. Duis tincidunt. In urna. <strong>Vestibulum convallis</strong> metus eget orci posuere bibendum. Quisque sit amet augue. Ut eros. Curabitur tortor dui, consequat in, congue ac, tincidunt a, lacus. Morbi diam. </div>
+    <div class="workzone-left" >
+
+      <div ng-show="activeView=='home'">
+        <masterpage></masterpage>
       </div>
-      <div class="clear"></div>
-      <div class="latestprojectzone">
-        <h1>Latest Projects</h1>
-            <!--<div class="projectgallery" id="content-slider" style="height:113px;width:400px;overflow: hidden">
-                <div id="slider">
-                  <div id="mask">
-                    <div class="projectimg" id="first" class="firstanimation"><img src="images/project1.jpg" alt="" border="0" /></div>
-                    <div class="projectimg" id="second" class="secondanimation"><img src="images/project2.jpg" alt="" border="0" /></div>
-                    <div class="projectimg" id="third" class="thirdanimation"><img src="images/project3.jpg" alt="" border="0" /></div>
-                    <div class="projectimg" id="fourth" class="fourthanimation"><img src="images/project4.jpg" alt="" border="0" /></div>
-                  </div>
-                </div>
-            </div>-->
-        <div class="container">
-          <div id="content-slider">
-            <div id="slider">  <!-- Slider container -->
-              <div id="mask">  <!-- Mask -->
-
-                <ul>
-                  <li id="first" class="firstanimation" style="justify-content: center">  <!-- ID for tooltip and class for animation -->
-                    <img src="images/project1.jpg" />
-                    <div><span>Bridge Construction</span></div>
-                  </li>
-
-                  <li id="second" class="secondanimation">
-                    <img src="images/project2.jpg" />
-                    <div><span>Marine Construction</span></div>
-                  </li>
-
-                  <li id="third" class="thirdanimation">
-                    <img src="images/project3.jpg" />
-                    <div><span>Office Construction</span></div>
-                  </li>
-
-                  <li id="fourth" class="fourthanimation">
-                    <img src="images/project4.jpg" />
-                    <div><span>Building Construction</span></div>
-                  </li>
-                </ul>
-
-              </div>  <!-- End Mask -->
-              <div class="progress-bar"></div>  <!-- Progress Bar -->
-            </div>  <!-- End Slider Container -->
-          </div>
-        </div>
+      <div ng-show="activeView=='active'">
+        <aboutus></aboutus>
       </div>
-    </div>
+      <div ng-show="activeView=='projects'">
+        <projects></projects>
+      </div>
+      <div ng-show="activeView=='services'">
+        <services></services>
+      </div>
+      <div ng-show="activeView=='support'">
+        <support></support>
+      </div>
+      <div ng-show="activeView=='privacy'">
+        <privacy></privacy>
+      </div>
+      <div ng-show="activeView=='contactus'">
+        <contactus></contactus>
+      </div>
+
+      </div>
     <div class="workzone-right">
       <div>
         <h1>Latest Events</h1>
@@ -113,6 +89,5 @@
   </div>
 </div>
 <div class="clear"></div>
-<div align=center></div>
 </body>
 </html>
