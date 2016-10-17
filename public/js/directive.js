@@ -42,22 +42,22 @@ app.directive('masterpage',[function($scope){
 
                                     '<ul>'+
                                         '<li id="first" class="firstanimation" style="justify-content: center">  <!-- ID for tooltip and class for animation -->'+
-                                            '<img src="images/project1.jpg" />'+
+                                            '<img src="images/project1.jpg" width="500px" height:"230px" />'+
                                             '<div><span>Bridge Construction</span></div>'+
                                         '</li>'+
 
-                                        '<li id="second" class="secondanimation">'+
-                                            '<img src="images/project2.jpg" />'+
+                                        '<li id="second" class="secondanimation"  >'+
+                                            '<img src="images/project2.jpg" width="500px" height:"230px" />'+
                                             '<div><span>Marine Construction</span></div>'+
                                         '</li>'+
 
-                                        '<li id="third" class="thirdanimation">'+
-                                            '<img src="images/project3.jpg" />'+
+                                        '<li id="third" class="thirdanimation" >'+
+                                            '<img src="images/project3.jpg" width="500px" height:"230px" />'+
                                             '<div><span>Office Construction</span></div>'+
                                         '</li>'+
 
-                                        '<li id="fourth" class="fourthanimation">'+
-                                            '<img src="images/project4.jpg" />'+
+                                        '<li id="fourth" class="fourthanimation" >'+
+                                            '<img src="images/project4.jpg"  width="500px" height:"230px" />'+
                                             '<div><span>Building Construction</span></div>'+
                                         '</li>'+
                                     '</ul>'+

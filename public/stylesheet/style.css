@@ -5,7 +5,7 @@
 	background: white;
 	border: 5px solid #eaeaea;
 	box-shadow: 1px 1px 5px rgba(0,0,0,0.7);
-	height: 150px;
+	height: 250px;
 	width: 500px;
 	/*margin: 40px auto 0;*/
 	overflow: visible;
@@ -14,7 +14,7 @@
 
 #mask {
 	overflow: hidden;
-	height: 150px;
+	height: 250px;
 }
 
 #slider ul {
@@ -24,11 +24,11 @@
 }
 
 #slider li {
-	width: 310px;  /* Width Image */
+	width: 500px;  /* Width Image */
 	height: 150px; /* Height Image */
 	position: absolute;
 	right: -325px; /* Original Position - Outside of the Slider */
-	top: 10px;
+	top: 0px;
 	list-style: none;
 }
 
@@ -128,7 +128,7 @@ body {
 
 #container {
 	width:950px;
-	margin:0px auto;
+	margin:32px auto;
 	text-align:justify;
 }
 
@@ -139,8 +139,9 @@ body {
 }
 
 .banner {
-	height:384px;
-	background:url(../images/banner.jpg) left top no-repeat;
+	height:250px;
+    width:1000px;
+	background:url(../images/eventlogo.jpg) left top no-repeat;
 }
 
 .workzone {
@@ -160,7 +161,10 @@ body {
 }
 
 .logozone {
-	padding:61px 0px 0px 51px;
+    display: inline;
+    /*border: 1px solid red;*/
+    /*margin:10px;*/
+	/*padding:10px 0px 0px 51px;*/
 }
 
 .latestprojectzone {
@@ -311,8 +315,13 @@ a:hover {
 /* Inside Style Start Here	*/
 
 .insidebanner {
-	height:384px;
-	background:url(../images/insidebanner.jpg) left top no-repeat;
+	height:200px;
+	/*background:url(../images/insidebanner.jpg) left top no-repeat;*/
+}
+.inline {
+    display: inline;
+    border: 1px solid red;
+    margin:10px;
 }
 
 h3 {
